@@ -1,3 +1,290 @@
-這裏是长颈鹿Gavin的個人主頁,網站正在建設中,歡迎光臨!\\
-我是一名編程初學者,請多多指教.\\
-歡迎訪問我的Github主頁交流 https://github.com/gavinzhao1993
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>长颈鹿Gavin的草原 · 物理讲义</title>
+<meta name="description" content="长颈鹿Gavin的草原——一只爱好物理的长颈鹿分享的大学物理讲义，含电动力学、量子场论、宇宙学等九门课程的中英文 PDF。">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700&amp;display=swap">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%234C8A4A'/%3E%3Cpath d='M30 14c4 0 7 4 7 9v6h-7l-3 3 1 6 4-9h6c5 0 9-2 12-6-1 6-5 10-10 12v3h-3v4h-8v-4h-3v-3c-6-2-11-8-11-15 0-2 1-4 2-6l4 4c1-3 3-4 5-4z' fill='%23F5E7C9'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --grass-deep:#2F5D33;
+    --grass:#4C8A4A;
+    --grass-soft:#7FB069;
+    --soil:#7A5B3B;
+    --soil-deep:#5C4327;
+    --sun:#E0A23B;
+    --sky:#B9D7E4;
+    --paper:#FAF5E9;
+    --paper-card:#FFFDF6;
+    --ink:#2A3326;
+    --muted:#6C7567;
+    --line:#E4DCC7;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    line-height:1.7;
+    background:var(--paper);
+  }
+  h1,h2,h3,.serif{
+    font-family:"Noto Serif SC","Songti SC","SimSun",serif;
+    font-weight:600;
+  }
+
+  /* ===== Hero 草原 ===== */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    color:#12321a;
+    text-align:center;
+    padding:64px 20px 96px;
+    background:
+      radial-gradient(circle at 18% 22%, rgba(255,238,170,.55), transparent 18%),
+      linear-gradient(180deg,#BCD8E5 0%,#DCE8C0 34%,#A7C77A 58%,#5F9A52 82%,#3F7A3E 100%);
+  }
+  .hero-hills{
+    position:absolute; left:0; right:0; bottom:0; width:100%; height:180px;
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative; z-index:2; max-width:820px; margin:0 auto;}
+  .avatar{
+    width:128px; height:128px; margin:0 auto 22px; border-radius:50%;
+    object-fit:cover; border:4px solid #F5E7C9; box-shadow:0 10px 26px rgba(40,70,40,.28);
+  }
+  .hero h1{
+    margin:0 0 6px; font-size:clamp(30px,6vw,46px); letter-spacing:.04em; color:#16331d;
+    text-shadow:0 1px 0 rgba(255,255,255,.25);
+  }
+  .hero .tagline{
+    font-size:clamp(16px,3vw,20px); color:#1f4027; font-weight:600;
+  }
+  .hero .welcome{
+    max-width:560px; margin:14px auto 0; font-size:14.5px; color:#24482c;
+    background:rgba(255,251,240,.62); border-radius:14px; padding:12px 18px; line-height:1.7;
+  }
+
+  /* ===== 讲义流 ===== */
+  .feed{
+    max-width:880px; margin:0 auto; padding:44px 18px 64px;
+  }
+  .feed-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    border-bottom:3px solid var(--grass); padding-bottom:10px; margin-bottom:22px;
+  }
+  .feed-head h2{margin:0; font-size:24px; color:var(--grass-deep);}
+  .feed-head .note{font-size:13px; color:var(--muted);}
+
+  .post{
+    position:relative;
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:22px 22px 20px 26px;
+    margin:0 0 18px;
+    box-shadow:0 4px 14px rgba(60,80,50,.06);
+  }
+  .post::before{
+    content:""; position:absolute; left:0; top:18px; bottom:18px; width:5px;
+    border-radius:0 4px 4px 0;
+  }
+  .post.pinned::before{background:var(--sun);}
+  .post.course::before{background:var(--grass-soft);}
+
+  .post .meta{
+    display:flex; align-items:center; gap:10px; margin-bottom:4px;
+  }
+  .post .pin-badge{
+    display:inline-block; background:var(--sun); color:#402f12; font-size:12px;
+    padding:2px 10px; border-radius:999px; font-weight:600;
+  }
+  .post .kind{font-size:12px; color:var(--muted);}
+  .post h3{
+    margin:0 0 4px; font-size:21px; color:var(--ink);
+  }
+  .post .desc{margin:0 0 16px; font-size:14px; color:var(--muted);}
+  .post .files{display:flex; flex-wrap:wrap; gap:12px;}
+  .dl{
+    display:inline-flex; align-items:center; gap:8px;
+    text-decoration:none; font-size:14px; font-weight:600;
+    color:#fff; background:var(--grass); border-radius:10px;
+    padding:9px 16px; transition:background .18s ease, transform .12s ease;
+  }
+  .dl:hover{background:var(--grass-deep);}
+  .dl:active{transform:translateY(1px);}
+  .dl .lang{opacity:.9; font-weight:400; font-size:12.5px;}
+  .dl.dl-en{background:var(--soil);}
+  .dl.dl-en:hover{background:var(--soil-deep);}
+  .dl svg{width:15px; height:15px; flex:none;}
+
+  /* ===== 页脚 ===== */
+  footer{
+    background:var(--grass-deep); color:#dcebda; text-align:center;
+    padding:30px 20px; font-size:13px;
+  }
+  footer .foot-name{font-family:"Noto Serif SC",serif; font-size:16px; color:#F5E7C9; margin-bottom:6px;}
+  footer p{margin:4px 0;}
+
+  /* ===== 响应式 ===== */
+  @media (max-width:560px){
+    .hero{padding:46px 16px 78px;}
+    .avatar{width:104px; height:104px;}
+    .post{padding:18px 16px 16px 20px;}
+    .feed-head{flex-direction:column; gap:4px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .dl,.dl:hover{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Hero 草原 ===== -->
+<header class="hero">
+  <svg class="hero-hills" viewBox="0 0 1200 180" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 120 C160 70 320 140 520 92 C700 50 880 130 1080 84 L1200 70 L1200 180 L0 180 Z" fill="#3F7A3E"/>
+    <path d="M0 140 C200 110 400 160 620 120 C820 88 1000 150 1200 110 L1200 180 L0 180 Z" fill="#2F5D33" opacity=".85"/>
+  </svg>
+  <div class="wrap">
+    <img class="avatar" src="assets/gavin.jpg" alt="长颈鹿Gavin的头像">
+    <h1>长颈鹿Gavin的草原</h1>
+    <div class="tagline">一只爱好物理的长颈鹿</div>
+    <p class="welcome">
+      我把多年整理的大学物理讲义放到草原上，供路过的你自取。
+      涵盖九门课程的中英文版本，欢迎下载、学习与交流。
+    </p>
+  </div>
+</header>
+
+<!-- ===== 讲义流 ===== -->
+<main class="feed">
+  <div class="feed-head">
+    <h2>草原上的讲义</h2>
+    <span class="note">点击对应语言按钮即可下载 PDF</span>
+  </div>
+
+  <!-- 置顶：合订本 -->
+  <article class="post pinned">
+    <div class="meta">
+      <span class="pin-badge">置顶</span>
+      <span class="kind">全部科目合集 · 中英文</span>
+    </div>
+    <h3>物理学讲义 合订本</h3>
+    <p class="desc">九门课程的完整合集，适合一次性收藏。</p>
+    <div class="files">
+      <a class="dl" href="lectures/长颈鹿物理学讲义_合订本（中文版）.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+        下载中文版 <span class="lang">PDF</span>
+      </a>
+      <a class="dl dl-en" href="lectures/长颈鹿物理学讲义_合订本（英文版）.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+        Download EN <span class="lang">PDF</span>
+      </a>
+    </div>
+  </article>
+
+  <!-- 各科目 -->
+  <article class="post course">
+    <div class="meta"><span class="kind">课程讲义</span></div>
+    <h3>电动力学</h3>
+    <p class="desc">从 Maxwell 方程组到电磁波、辐射与相对论性电动力学。</p>
+    <div class="files">
+      <a class="dl" href="lectures/长颈鹿物理学讲义_电动力学_中文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>中文版 <span class="lang">PDF</span></a>
+      <a class="dl dl-en" href="lectures/长颈鹿物理学讲义_电动力学_英文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>English <span class="lang">PDF</span></a>
+    </div>
+  </article>
+
+  <article class="post course">
+    <div class="meta"><span class="kind">课程讲义</span></div>
+    <h3>光学</h3>
+    <p class="desc">几何光学、波动光学与干涉衍射现象。</p>
+    <div class="files">
+      <a class="dl" href="lectures/长颈鹿物理学讲义_光学_中文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>中文版 <span class="lang">PDF</span></a>
+      <a class="dl dl-en" href="lectures/长颈鹿物理学讲义_光学_英文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>English <span class="lang">PDF</span></a>
+    </div>
+  </article>
+
+  <article class="post course">
+    <div class="meta"><span class="kind">课程讲义</span></div>
+    <h3>理论力学</h3>
+    <p class="desc">Lagrange 与 Hamilton 力学、变分原理与守恒律。</p>
+    <div class="files">
+      <a class="dl" href="lectures/长颈鹿物理学讲义_理论力学_中文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>中文版 <span class="lang">PDF</span></a>
+      <a class="dl dl-en" href="lectures/长颈鹿物理学讲义_理论力学_英文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>English <span class="lang">PDF</span></a>
+    </div>
+  </article>
+
+  <article class="post course">
+    <div class="meta"><span class="kind">课程讲义</span></div>
+    <h3>粒子物理</h3>
+    <p class="desc">标准模型、基本粒子与相互作用。</p>
+    <div class="files">
+      <a class="dl" href="lectures/长颈鹿物理学讲义_粒子物理_中文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>中文版 <span class="lang">PDF</span></a>
+      <a class="dl dl-en" href="lectures/长颈鹿物理学讲义_粒子物理_英文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>English <span class="lang">PDF</span></a>
+    </div>
+  </article>
+
+  <article class="post course">
+    <div class="meta"><span class="kind">课程讲义</span></div>
+    <h3>量子场论</h3>
+    <p class="desc">场的量子化、路径积分与费曼图。</p>
+    <div class="files">
+      <a class="dl" href="lectures/长颈鹿物理学讲义_量子场论_中文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>中文版 <span class="lang">PDF</span></a>
+      <a class="dl dl-en" href="lectures/长颈鹿物理学讲义_量子场论_英文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>English <span class="lang">PDF</span></a>
+    </div>
+  </article>
+
+  <article class="post course">
+    <div class="meta"><span class="kind">课程讲义</span></div>
+    <h3>量子力学</h3>
+    <p class="desc">波函数、算符、测量与微扰论。</p>
+    <div class="files">
+      <a class="dl" href="lectures/长颈鹿物理学讲义_量子力学_中文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>中文版 <span class="lang">PDF</span></a>
+      <a class="dl dl-en" href="lectures/长颈鹿物理学讲义_量子力学_英文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>English <span class="lang">PDF</span></a>
+    </div>
+  </article>
+
+  <article class="post course">
+    <div class="meta"><span class="kind">课程讲义</span></div>
+    <h3>凝聚态</h3>
+    <p class="desc">固体能带、晶格与凝聚态物理基础。</p>
+    <div class="files">
+      <a class="dl" href="lectures/长颈鹿物理学讲义_凝聚态_中文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>中文版 <span class="lang">PDF</span></a>
+      <a class="dl dl-en" href="lectures/长颈鹿物理学讲义_凝聚态_英文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>English <span class="lang">PDF</span></a>
+    </div>
+  </article>
+
+  <article class="post course">
+    <div class="meta"><span class="kind">课程讲义</span></div>
+    <h3>统计力学</h3>
+    <p class="desc">系综理论、熵、配分函数与相变。</p>
+    <div class="files">
+      <a class="dl" href="lectures/长颈鹿物理学讲义_统计力学_中文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>中文版 <span class="lang">PDF</span></a>
+      <a class="dl dl-en" href="lectures/长颈鹿物理学讲义_统计力学_英文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>English <span class="lang">PDF</span></a>
+    </div>
+  </article>
+
+  <article class="post course">
+    <div class="meta"><span class="kind">课程讲义</span></div>
+    <h3>宇宙学</h3>
+    <p class="desc">从暴胀、大爆炸到大尺度结构的形成。</p>
+    <div class="files">
+      <a class="dl" href="lectures/长颈鹿物理学讲义_宇宙学_中文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>中文版 <span class="lang">PDF</span></a>
+      <a class="dl dl-en" href="lectures/长颈鹿物理学讲义_宇宙学_英文版.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>English <span class="lang">PDF</span></a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="foot-name">长颈鹿Gavin的草原</div>
+  <p>一只爱好物理的长颈鹿 · 讲义自取，欢迎学习交流</p>
+  <p>© Gavin · 所有内容可自由下载用于学习</p>
+</footer>
+
+</body>
+</html>
